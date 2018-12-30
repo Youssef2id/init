@@ -1,8 +1,0 @@
-To point an addresse ip to a domaine name we should edit the hosts file and add the adresse ip that we want to point to at the end of the file.
-
-============ /etc/hosts ============
-127.0.0.1       localhost			
-255.255.255.255 broadcasthost		
-::1             localhost			
-46.19.122.85 	intra.42.fr			
-====================================
