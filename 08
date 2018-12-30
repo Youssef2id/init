@@ -1,0 +1,6 @@
+cat ~/.ssh/authorized_keys
+
+The authorized_keys file in SSH specifies the SSH keys that can be used for logging into the user account for which the file is configured.
+
+To add your ssh id to authorized_keys 
+ssh-copy-id -i user-name@ip-addresse.
