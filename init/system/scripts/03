@@ -1,0 +1,57 @@
+#!/bin/bash
+echo -e "\033[1;34m"
+clear;
+command -v figlet > /dev/null 2>&1
+if [ $? -eq 0 ]; then
+	figlet -c "GIT PUSH"
+else
+	cat << "EOF"
+   _____ _____ _______   _____  _    _  _____ _    _
+  / ____|_   _|__   __| |  __ \| |  | |/ ____| |  | |
+ | |  __  | |    | |    | |__) | |  | | (___ | |__| |
+ | | |_ | | |    | |    |  ___/| |  | |\___ \|  __  |
+ | |__| |_| |_   | |    | |    | |__| |____) | |  | |
+  \_____|_____|  |_|    |_|     \____/|_____/|_|  |_|
+
+EOF
+fi
+OLD_PWD=$PWD
+read -e -p "ENTER THE GIT URL:
+-> " GIT_URL
+read -e -p "ENTER THE NAME OF THE FOLDER YOU WANT TO CLONE:
+->" GIT_NAME
+read -e -p "ENTER WHERE YOU WANT TO CLONE YOUR GIT:
+->" GIT_DIR
+git clone $GIT_URL $GIT_DIR$GIT_NAME
+if [ $? -eq 0 ]; then
+	echo -e "\033[1;32mOK\033[0;1m"
+else
+	echo -e "\033[1;31mFAIL\033[0m"
+	exit 3;
+fi
+echo -e "\033[1;32m"
+read -e -p "WHAT YOU WANT TO PUSH:
+->" TO_PUSH
+cp -fr $TO_PUSH $GIT_DIR$GIT_NAME
+if [ $? -eq 0 ]; then
+	echo -e "\033[1;32mDONE COPYING\033[0;1m"
+else
+	echo -e "\033[1;31mFAIL COPYING\033[0m"
+	exit 3;
+fi
+cd $GIT_DIR$GIT_NAME;
+echo -e "\033[1;34m
+ ===========================================================
+|                        GIT FOLDER                         |
+ ==========================================================="
+git add *;
+read -e -p "ENTER YOUR COMMIT MESSAGE:
+->" SMS
+git commit -m "$SMS"
+git push
+cd $OLD_PWD
+echo -e "\033[1;32m
+ ===========================================================
+|                      * THANK YOU *                        |
+ ==========================================================="
+ echo -e "\033[0m"

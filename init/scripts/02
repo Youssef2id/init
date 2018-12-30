@@ -1,0 +1,24 @@
+#!/bin/bash
+echo -e "\033[1;34m"
+clear;
+command -v figlet > /dev/null 2>&1
+if [ $? -eq 0 ]; then
+	figlet -c "DELETE USER"
+else
+	cat << "EOF"
+ ____ ____ ____ ____ ____ ____ _________ _________ ____ ____ ____ ____ 
+||D |||E |||L |||E |||T |||E |||       |||       |||U |||S |||E |||R ||
+||__|||__|||__|||__|||__|||__|||_______|||_______|||__|||__|||__|||__||
+|/__\|/__\|/__\|/__\|/__\|/__\|/_______\|/_______\|/__\|/__\|/__\|/__\|
+
+EOF
+fi
+echo -e "\033[1;32mENTER THE NAME OF THE USER THAT YOU WANT TO DELETE:\033[1;34m"
+read USERNAME;
+if(pgrep -u $USERNAME  > /dev/null 2> /dev/null)
+then
+	kill `pgrep -u $USENAME`
+fi
+echo $USERNAME
+deluser $USERNAME
+echo "\033[0m"
